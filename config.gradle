@@ -15,8 +15,4 @@ ext {
           appcompat   : "com.android.support:appcompat-v7:${SUPPORT_VERSION}",
           recyclerview: "com.android.support:recyclerview-v7:${SUPPORT_VERSION}",
   ]
-  // 版本名称
-  version_name = '1.0.0-SNAPSHOT'
-  // 库的名字
-  project_name = 'mae-bundles-voice'
 }

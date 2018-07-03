@@ -340,17 +340,13 @@ public class ImageCursorActivity extends AlbumBaseActivity implements View.OnCli
                     return ;
                 }
 
-                // 喜欢用 回调
-                if (ConfigBuilder.l != null) {
-                    ConfigBuilder.l.onSelected(result);
-                } else {
-                    // 喜欢用 onActivityResult
-                    Intent intent = new Intent();
-                    intent.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, ImageQueue.getSelectedImages());
-                    setResult(RESULT_OK, intent);
-                }
+                Intent intent = new Intent();
+                intent.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, ImageQueue.getSelectedImages());
+                setResult(RESULT_OK, intent);
+
                 finish();
             }
         });
     }
+
 }

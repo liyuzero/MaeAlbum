@@ -144,16 +144,9 @@ public class ImageFragment extends Fragment implements ImageAdapter.OnPreviewLis
     }
 
     private void finishActivity(){
-        ArrayList<String> result = ImageQueue.getSelectedImages();
-        // 喜欢用 回调
-        if (ConfigBuilder.l != null) {
-            ConfigBuilder.l.onSelected(result);
-        } else {
-            // 喜欢用 onActivityResult
-            Intent intent = new Intent();
-            intent.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, ImageQueue.getSelectedImages());
-            getActivity().setResult(RESULT_OK, intent);
-        }
+        Intent intent = new Intent();
+        intent.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, ImageQueue.getSelectedImages());
+        getActivity().setResult(RESULT_OK, intent);
         getActivity().finish();
     }
 

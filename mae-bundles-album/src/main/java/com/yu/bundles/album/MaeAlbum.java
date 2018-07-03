@@ -9,6 +9,8 @@ import com.yu.bundles.album.image.ImageCursorActivity;
 import com.yu.bundles.album.image.ImageEngine;
 import com.yu.bundles.album.preview.ImagePreviewOuter2Activity;
 import com.yu.bundles.album.utils.MimeType;
+import com.yu.bundles.monitorfragment.MAEActivityResultListener;
+import com.yu.bundles.monitorfragment.MAEMonitorFragment;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -191,7 +193,7 @@ public final class MaeAlbum {
      * 启动方法
      *
      */
-    public void forResult(AlbumListener albumListener) {
+    public void forResult(final AlbumListener albumListener) {
         Activity activity = mContext.get();
         if (activity == null || albumListener == null) {
             return;
@@ -215,9 +217,25 @@ public final class MaeAlbum {
         initStaticConfig(activity);
 
         if (fragment != null) {
-            fragment.startActivity(intent);
+            MAEMonitorFragment.getInstance(fragment).startActivityForResult(intent, 325467, new MAEActivityResultListener() {
+                @Override
+                public void onActivityResult(int i, int i1, Intent intent) {
+                    List<String> list = intent.getStringArrayListExtra(ImageCursorActivity.EXTRA_RESULT_SELECTION_PATH);
+                    if(i1 == Activity.RESULT_OK && list != null){
+                        albumListener.onSelected(list);
+                    }
+                }
+            });
         } else {
-            activity.startActivity(intent);
+            MAEMonitorFragment.getInstance(activity).startActivityForResult(intent, 325467, new MAEActivityResultListener() {
+                @Override
+                public void onActivityResult(int i, int i1, Intent intent) {
+                    List<String> list = intent.getStringArrayListExtra(ImageCursorActivity.EXTRA_RESULT_SELECTION_PATH);
+                    if(i1 == Activity.RESULT_OK && list != null){
+                        albumListener.onSelected(list);
+                    }
+                }
+            });
         }
     }
 

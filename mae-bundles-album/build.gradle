@@ -31,16 +31,6 @@ android {
     lintOptions {
         abortOnError false
     }
-
-    libraryVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.aar')) {
-                def fileName = "${project_name}-${version_name}.aar"
-                output.outputFile = new File(outputFile.parent, fileName)
-            }
-        }
-    }
 }
 
 configurations.all {

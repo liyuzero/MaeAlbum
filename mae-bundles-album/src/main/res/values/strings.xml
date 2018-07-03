@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">mae-album</string>
+
+    <string name="mae_album_local_image_selector">本地图片选择器</string>
+    <string name="mae_album_all_image">相机胶卷</string>
+    <string name="mae_album_selected_image">选中的图片</string>
+    <string name="mae_album_selected_ok">确定 (%1$d/%2$d)</string>
+    <string name="mae_album_selected">选中</string>
+    <string name="mae_album_image_index">%1$s/%2$s</string>
+    <string name="mae_album_grant_permission_success">授权成功，正在读取相册</string>
+    <string name="mae_album_grant_permission_failure">授权失败，无法读取相册</string>
+    <string name="mae_album_grant_advice_read_album">建议授予获取相册的权限</string>
+    <string name="mae_album_help">系统权限</string>
+    <string name="mae_album_help_content">缺少读取系统相册的权限，请点击 "设置" - "权限" 授予应用权限</string>
+    <string name="mae_album_quit">退出</string>
+    <string name="mae_album_settings">设置</string>
+    <string name="mae_album_no_image">没有相册图片</string>
+    <string name="mae_album_take_photo_from_camera">调用系统相机拍照</string>
+    <string name="mae_album_title_folder">相册列表</string>
+    <string name="mae_album_action_ok">确定</string>
+    <string name="mae_album_ucrop_error_input_data_is_absent">必须指定输入和输出Uri</string>
+    <string name="mae_album_not_allow_type">不支持的类型</string>
+
+    <string name="mae_album_camera_album">相机胶卷</string>
+    <string name="mae_album_no_permission">没有相册访问权限</string>
+
+    <string name="mae_album_all">全部</string>
+    <string name="mae_save_picture_2_local">保存图片至本地</string>
+    <string name="mae_picture_has_been_saved">图片已被保存至：</string>
+    <string name="mae_picture_save_failure">图片保存失败</string>
+    <string name="mae_take_photo_failure">拍照失败</string>
+
+    <string name="mae_error_no_video_activity">没有支持视频预览的应用</string>
+    <string name="mae_photo_grid_capture">拍一张</string>
+
+    <string name="mae_bundles_album_open">打开</string>
+</resources>

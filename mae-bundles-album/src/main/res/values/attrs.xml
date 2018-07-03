@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="mae_album_topBar_text_color" format="color|reference"/>
+    <attr name="mae_album_unCheckedColorRes" format="color|reference"/>
+    <attr name="mae_album_checkedColorRes" format="color|reference"/>
+
+    <declare-styleable name="StateMaskView">
+        <attr name="state_checked" format="boolean" />
+        <attr name="state_unused" format="boolean" />
+        <attr name="stateEnabled" format="enum">
+            <enum name="state_checked" value="0x01" />
+            <enum name="state_unused" value="0x02" />
+        </attr>
+    </declare-styleable>
+</resources>

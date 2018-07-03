@@ -1,0 +1,16 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="mae_album_activity_horizontal_margin">16dp</dimen>
+    <dimen name="mae_album_activity_vertical_margin">16dp</dimen>
+    <dimen name="mae_album_ucrop_padding_crop_frame">16dp</dimen>
+    <dimen name="mae_album_ucrop_text_size_widget_text">13sp</dimen>
+    <dimen name="mae_album_ucrop_margit_top_widget_text">10sp</dimen>
+    <dimen name="mae_album_ucrop_size_wrapper_rotate_button">50dp</dimen>
+    <dimen name="mae_album_ucrop_height_crop_aspect_ratio_text">40dp</dimen>
+    <!--Crop View-->
+    <dimen name="mae_album_ucrop_default_crop_grid_stoke_width">1dp</dimen>
+    <dimen name="mae_album_ucrop_default_crop_frame_stoke_width">1dp</dimen>
+    <dimen name="mae_album_ucrop_default_crop_rect_corner_touch_threshold">30dp</dimen>
+    <dimen name="mae_album_ucrop_default_crop_rect_min_size">100dp</dimen>
+    <dimen name="mae_album_ucrop_default_crop_rect_corner_touch_area_line_length">10dp</dimen>
+</resources>

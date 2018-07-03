@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.yu.bundles.album.preview.widget.HackyViewPager
+        android:id="@+id/gallery_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/footer_view"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="#bb000000"
+        android:clickable="true">
+
+        <CheckBox
+            android:id="@+id/ckb_image_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:drawablePadding="8dp"
+            android:paddingLeft="8dp"
+            android:text="@string/mae_album_selected"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <com.yu.bundles.album.widget.MaeAlbumToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:fitsSystemWindows="true"
+        android:minHeight="?actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:titleTextColor="@android:color/white" >
+
+        <TextView
+            android:id="@+id/toolbar_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:minWidth="48dp"
+            android:layout_gravity="right"
+            android:textSize="16sp"/>
+
+    </com.yu.bundles.album.widget.MaeAlbumToolbar>
+
+    <ImageView
+        android:id="@+id/action_download"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:padding="13dp"
+        android:src="@drawable/mae_album_download"
+        android:background="@color/mae_album_download_icon_background"
+        android:scaleType="centerInside"/>
+
+    <ImageView
+        android:id="@+id/video_play_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:src="@drawable/mae_album_video_play"/>
+
+</RelativeLayout>

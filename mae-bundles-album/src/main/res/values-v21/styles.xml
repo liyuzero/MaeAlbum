@@ -1,0 +1,4 @@
+<resources>
+
+    <style name="mae_album_AppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+</resources>

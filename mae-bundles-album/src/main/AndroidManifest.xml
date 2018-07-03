@@ -1,0 +1,37 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yu.bundles.album">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true">
+
+        <activity
+            android:name="com.yu.bundles.album.preview.ImagePreviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/mae_album_AppTheme" />
+        <activity
+            android:name="com.yu.bundles.album.image.ImageCursorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/mae_album_AppTheme" />
+        <activity
+            android:name="com.yu.bundles.album.preview.ImagePreviewOuter2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/mae_album_AppTheme" />
+
+        <provider
+            android:name="com.yu.bundles.album.preview.MaeBundleAlbumProvider"
+            android:authorities="${applicationId}.mae.bundles.album.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/mae_album_file_provider_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

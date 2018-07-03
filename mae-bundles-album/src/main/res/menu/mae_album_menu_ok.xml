@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.zcw.v7.MainActivity">
+
+    <item
+        android:id="@+id/action_ok"
+        android:enabled="false"
+        android:orderInCategory="100"
+        android:title="@string/mae_album_action_ok"
+        app:showAsAction="always" />
+
+</menu>

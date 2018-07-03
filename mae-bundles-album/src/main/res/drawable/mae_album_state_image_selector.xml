@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:auto="http://schemas.android.com/apk/res-auto">
+    <item android:drawable="@color/mae_album_black_36" auto:state_checked="true" />
+    <item android:drawable="@color/mae_album_white_87" auto:state_unused="true" />
+    <item android:drawable="@android:color/transparent" />
+</selector>

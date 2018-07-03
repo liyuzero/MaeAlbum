@@ -1,0 +1,35 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="MyAlumWhite" parent="Mae_Album_Base_theme">
+        <item name="colorPrimary">#ffffff</item>
+        <item name="colorPrimaryDark">#ffffff</item>
+        <item name="mae_album_topBar_text_color">@android:color/black</item>
+        <item name="mae_album_unCheckedColorRes">#ffffff</item>
+        <item name="mae_album_checkedColorRes">@android:color/black</item>
+    </style>
+
+    <style name="MyAlumRed" parent="Mae_Album_Base_theme">
+        <item name="colorPrimary">#E4393C</item>
+        <item name="colorPrimaryDark">#E4393C</item>
+        <item name="mae_album_topBar_text_color">@android:color/white</item>
+        <item name="mae_album_unCheckedColorRes">@android:color/white</item>
+        <item name="mae_album_checkedColorRes">#E4393C</item>
+    </style>
+
+    <style name="MyAlumBlue" parent="Mae_Album_Base_theme">
+        <item name="colorPrimary">#458bff</item>
+        <item name="colorPrimaryDark">#458bff</item>
+        <item name="mae_album_topBar_text_color">@android:color/white</item>
+        <item name="mae_album_unCheckedColorRes">#5d5c5c</item>
+        <item name="mae_album_checkedColorRes">#458bff</item>
+    </style>
+
+</resources>

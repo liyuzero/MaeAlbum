@@ -1,0 +1,9 @@
+<resources>
+    <style name="Mae_Album_Base_theme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/mae_album_color_blue</item>
+        <item name="colorPrimaryDark">@color/mae_album_color_blue</item>
+        <item name="mae_album_topBar_text_color">@android:color/white</item>
+        <item name="mae_album_unCheckedColorRes">@color/mae_album_checkbox_unchecked_color</item>
+        <item name="mae_album_checkedColorRes">@color/mae_album_checkbox_checked_color</item>
+    </style>
+</resources>

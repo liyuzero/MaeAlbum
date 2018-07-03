@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mae_album_ripple_click">
+
+    <TextView
+        android:id="@+id/capture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawablePadding="8dp"
+        android:drawableTop="@drawable/mae_album_camera"
+        android:gravity="center"
+        android:text="@string/mae_photo_grid_capture"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"/>
+
+</FrameLayout>

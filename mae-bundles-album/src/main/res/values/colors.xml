@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="mae_album_checkbox_checked_color">#1E8AE8</color>
+    <color name="mae_album_checkbox_unchecked_color">#8c000000</color>
+
+    <color name="mae_album_color_blue">#1E8AE8</color>
+
+    <color name="colorPrimary">#fb372e</color>
+    <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="colorAccent">#fb372e</color>
+
+    <color name="mae_album_black_36">#36000000</color>
+    <color name="mae_album_white_87">#87ffffff</color>
+
+    <color name="mae_album_download_icon_background">#20000000</color>
+
+    <color name="mae_album_background">#444444</color>
+    <color name="mae_album_ripple">#333333</color>
+    <color name="mae_album_capture_color">#333333</color>
+</resources>

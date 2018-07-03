@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/open_album_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="默认红色主题相册" />
+
+    <Button
+        android:id="@+id/open_album_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="蓝色主题相册" />
+
+    <Button
+        android:id="@+id/open_album_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义主题" />
+
+    <Button
+        android:id="@+id/outer_album_overview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="外部照片浏览" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#333333" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择的图片路径如下：" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

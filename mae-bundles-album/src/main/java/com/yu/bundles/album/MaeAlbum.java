@@ -220,8 +220,8 @@ public final class MaeAlbum {
             MAEMonitorFragment.getInstance(fragment).startActivityForResult(intent, 325467, new MAEActivityResultListener() {
                 @Override
                 public void onActivityResult(int i, int i1, Intent intent) {
-                    List<String> list = intent.getStringArrayListExtra(ImageCursorActivity.EXTRA_RESULT_SELECTION_PATH);
-                    if(i1 == Activity.RESULT_OK && list != null){
+                    if(i1 == Activity.RESULT_OK && intent != null){
+                        List<String> list = intent.getStringArrayListExtra(ImageCursorActivity.EXTRA_RESULT_SELECTION_PATH);
                         albumListener.onSelected(list);
                     }
                 }
@@ -230,8 +230,8 @@ public final class MaeAlbum {
             MAEMonitorFragment.getInstance(activity).startActivityForResult(intent, 325467, new MAEActivityResultListener() {
                 @Override
                 public void onActivityResult(int i, int i1, Intent intent) {
-                    List<String> list = intent.getStringArrayListExtra(ImageCursorActivity.EXTRA_RESULT_SELECTION_PATH);
-                    if(i1 == Activity.RESULT_OK && list != null){
+                    if(i1 == Activity.RESULT_OK && intent != null){
+                        List<String> list = intent.getStringArrayListExtra(ImageCursorActivity.EXTRA_RESULT_SELECTION_PATH);
                         albumListener.onSelected(list);
                     }
                 }

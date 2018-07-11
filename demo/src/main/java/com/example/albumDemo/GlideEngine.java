@@ -23,7 +23,7 @@ import java.io.File;
 public class GlideEngine implements ImageEngine {
 
     @Override
-    public void loadImg(Context context, String path, ImageView imageView, boolean isNeedPlaceHolder, final AlbumEngineLoadListener... listeners) {
+    public void loadImg(Context context, Object path, ImageView imageView, boolean isNeedPlaceHolder, final AlbumEngineLoadListener... listeners) {
         BitmapRequestBuilder builder = Glide.with(context).load(path).asBitmap().error(R.mipmap.mae_album_img_default);
         if(isNeedPlaceHolder){
             builder = builder.placeholder(R.mipmap.mae_album_img_default);
@@ -36,7 +36,7 @@ public class GlideEngine implements ImageEngine {
     }
 
     @Override
-    public void loadGifImg(Context context, String path, ImageView imageView, boolean isNeedPlaceHolder, final AlbumEngineLoadListener... listeners) {
+    public void loadGifImg(Context context, Object path, ImageView imageView, boolean isNeedPlaceHolder, final AlbumEngineLoadListener... listeners) {
         GifRequestBuilder builder = Glide.with(context).load(path).asGif().priority(Priority.HIGH).diskCacheStrategy(DiskCacheStrategy.NONE).error(R.mipmap.mae_album_img_default);
         if(isNeedPlaceHolder){
             builder = builder.placeholder(R.mipmap.mae_album_img_default);
@@ -69,7 +69,7 @@ public class GlideEngine implements ImageEngine {
     }
 
     @Override
-    public File downloadFile(Context context, String url) {
+    public File downloadFile(Context context, Object url) {
         try {
             return Glide.with(context)
                     .load(url)

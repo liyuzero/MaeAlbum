@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MaeAlbum.setImageEngine(new GlideEngine());
         MaeAlbum.setOnPreviewLongClickListener(new OnPreviewLongClickListener() {
             @Override
-            public void onPreviewLongClick(String imgPath) {
-                Toast.makeText(getApplicationContext(), imgPath, Toast.LENGTH_SHORT).show();
+            public void onPreviewLongClick(Object imgPath) {
+                Toast.makeText(getApplicationContext(), (String)imgPath, Toast.LENGTH_SHORT).show();
             }
         });
 

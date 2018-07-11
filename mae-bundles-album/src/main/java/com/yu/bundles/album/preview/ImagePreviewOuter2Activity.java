@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.content.FileProvider;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -57,7 +58,7 @@ public class ImagePreviewOuter2Activity extends AlbumBaseActivity implements Vie
     /**
      * 所有图片的列表
      */
-    private ArrayList<String> mImages;
+    private ArrayList<Parcelable> mImages;
     /**
     * 图片下载成功标识
     * */
@@ -75,7 +76,7 @@ public class ImagePreviewOuter2Activity extends AlbumBaseActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mae_album_activity_image_preview);
         //所有图片
-        mImages = getIntent().getStringArrayListExtra(EXTRA_IMAGE_INFO_LIST);
+        mImages = getIntent().getParcelableArrayListExtra(EXTRA_IMAGE_INFO_LIST);
         if (mImages == null) {
             finish();
             return;
@@ -151,7 +152,7 @@ public class ImagePreviewOuter2Activity extends AlbumBaseActivity implements Vie
     }
 
     private void downloadImg(){
-        final String imgInfo = mImages.get(mCurrPos);
+        final Object imgInfo = mImages.get(mCurrPos);
         if(downloadSuccessFlags[mCurrPos] != null){
             showInfoAfterDownload(downloadSuccessFlags[mCurrPos]);
             return;
@@ -223,7 +224,7 @@ public class ImagePreviewOuter2Activity extends AlbumBaseActivity implements Vie
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View galleryItemView = View.inflate(getApplicationContext(), R.layout.mae_album_preview_image_item, null);
-            final String imageInfo = mImages.get(position);
+            final Object imageInfo = mImages.get(position);
             PhotoView galleryPhotoView = galleryItemView.findViewById(R.id.iv_show_image);
             final View progressBar = galleryItemView.findViewById(R.id.progressbar);
             progressBar.setVisibility(View.VISIBLE);

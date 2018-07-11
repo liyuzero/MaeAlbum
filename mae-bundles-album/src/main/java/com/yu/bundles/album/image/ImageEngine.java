@@ -10,9 +10,9 @@ import java.io.File;
  */
 
 public interface ImageEngine {
-    File downloadFile(Context context, String url);
-    void loadImg(Context context, String path, ImageView imageView, boolean isNeedPlaceHolder, AlbumEngineLoadListener... listeners);
-    void loadGifImg(Context context, String path, ImageView imageView, boolean isNeedPlaceHolder, AlbumEngineLoadListener... listeners);
+    File downloadFile(Context context, Object pathInfo);
+    void loadImg(Context context, Object pathInfo, ImageView imageView, boolean isNeedPlaceHolder, AlbumEngineLoadListener... listeners);
+    void loadGifImg(Context context, Object pathInfo, ImageView imageView, boolean isNeedPlaceHolder, AlbumEngineLoadListener... listeners);
     interface AlbumEngineLoadListener {
         void onLoadComplete();
     }

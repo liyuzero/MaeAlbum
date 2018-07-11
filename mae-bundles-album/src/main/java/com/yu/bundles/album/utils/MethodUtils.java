@@ -52,7 +52,7 @@ public class MethodUtils {
         context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file.getAbsolutePath())));
     }
 
-    public static void downloadImg(final Activity activity, final String url, final String dirPath, final OnDownloadListener onDownloadListener){
+    public static void downloadImg(final Activity activity, final Object url, final String dirPath, final OnDownloadListener onDownloadListener){
         new Thread(new Runnable() {
             @Override
             public void run() {

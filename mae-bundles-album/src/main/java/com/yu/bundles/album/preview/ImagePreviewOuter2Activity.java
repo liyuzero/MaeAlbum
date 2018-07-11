@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.content.FileProvider;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -58,7 +57,7 @@ public class ImagePreviewOuter2Activity extends AlbumBaseActivity implements Vie
     /**
      * 所有图片的列表
      */
-    private ArrayList<Parcelable> mImages;
+    private ArrayList mImages;
     /**
     * 图片下载成功标识
     * */
@@ -76,7 +75,12 @@ public class ImagePreviewOuter2Activity extends AlbumBaseActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mae_album_activity_image_preview);
         //所有图片
-        mImages = getIntent().getParcelableArrayListExtra(EXTRA_IMAGE_INFO_LIST);
+        try {
+            mImages = getIntent().getStringArrayListExtra(EXTRA_IMAGE_INFO_LIST);
+        } catch (Exception e){
+            mImages = getIntent().getParcelableArrayListExtra(EXTRA_IMAGE_INFO_LIST);
+        }
+
         if (mImages == null) {
             finish();
             return;

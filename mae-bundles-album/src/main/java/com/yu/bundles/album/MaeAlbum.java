@@ -241,16 +241,19 @@ public final class MaeAlbum {
     }
 
     // --------------------- 外界用的图片预览方法
-    public static void startPreview(Context context, ArrayList<Parcelable> urls, int currPos) {
+    public static void startPreview(Context context, ArrayList urls, int currPos) {
         startPreview(context, urls, currPos, true, false, true);
     }
 
-    public static void startPreview(Context context, ArrayList<Parcelable> urls, int currPos, boolean isShowDownloadIcon,
+    public static void startPreview(Context context, ArrayList urls, int currPos, boolean isShowDownloadIcon,
                                     boolean isShowDownloadSureDialog, boolean isShowSnackBar) {
         if (context == null) {
             return;
         }
         if(urls == null){
+            return;
+        }
+        if(urls.size() <= 0){
             return;
         }
         if(urls.size() > 100){
@@ -260,7 +263,13 @@ public final class MaeAlbum {
         initStaticConfig(context);
 
         Intent i = new Intent(context, ImagePreviewOuter2Activity.class);
-        i.putParcelableArrayListExtra(ImagePreviewOuter2Activity.EXTRA_IMAGE_INFO_LIST, urls);
+        if(urls.get(0) instanceof Parcelable){
+            i.putParcelableArrayListExtra(ImagePreviewOuter2Activity.EXTRA_IMAGE_INFO_LIST, (ArrayList<Parcelable>) urls);
+        } else if(urls.get(0) instanceof String){
+            i.putStringArrayListExtra(ImagePreviewOuter2Activity.EXTRA_IMAGE_INFO_LIST, (ArrayList<String>) urls);
+        } else {
+            return;
+        }
         i.putExtra(ImagePreviewOuter2Activity.EXTRA_IMAGE_POS, currPos);
         i.putExtra(ImagePreviewOuter2Activity.EXTRA_IS_SHOW_DOWNLOAD_SURE_DIALOG, isShowDownloadSureDialog);
         i.putExtra(ImagePreviewOuter2Activity.EXTRA_IS_SHOW_DOWNLOAD_ICON, isShowDownloadIcon);

@@ -58,6 +58,8 @@ public class ImagePreviewOuter2Activity extends AlbumBaseActivity implements Vie
      * 所有图片的列表
      */
     private ArrayList mImages;
+    //图片加载成功标识
+    boolean[] isLoadSuccess;
     /**
     * 图片下载成功标识
     * */
@@ -85,6 +87,12 @@ public class ImagePreviewOuter2Activity extends AlbumBaseActivity implements Vie
             finish();
             return;
         }
+
+        isLoadSuccess = new boolean[mImages.size()];
+        for (int i=0; i<isLoadSuccess.length; i++){
+            isLoadSuccess[i] = false;
+        }
+
         downloadSuccessFlags = new File[mImages.size()];
         //当前显示的图片的url
         //当前显示的位置
@@ -226,7 +234,7 @@ public class ImagePreviewOuter2Activity extends AlbumBaseActivity implements Vie
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(ViewGroup container, final int position) {
             View galleryItemView = View.inflate(getApplicationContext(), R.layout.mae_album_preview_image_item, null);
             final Object imageInfo = mImages.get(position);
             PhotoView galleryPhotoView = galleryItemView.findViewById(R.id.iv_show_image);
@@ -235,9 +243,11 @@ public class ImagePreviewOuter2Activity extends AlbumBaseActivity implements Vie
             ImageEngine.AlbumEngineLoadListener target = new ImageEngine.AlbumEngineLoadListener(){
                 @Override
                 public void onLoadComplete() {
+                    isLoadSuccess[position] = true;
                     progressBar.setVisibility(View.GONE);
                 }
             };
+
             ConfigBuilder.IMAGE_ENGINE.loadImg(ImagePreviewOuter2Activity.this, imageInfo, galleryPhotoView, false, target);
 
             // PhotoView click
@@ -277,14 +287,14 @@ public class ImagePreviewOuter2Activity extends AlbumBaseActivity implements Vie
      */
     private class PreviewChangeListener implements ViewPager.OnPageChangeListener {
         @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
 
         @Override
         public void onPageSelected(int position) {
             mCurrPos = position;
             imgDownloadView.setVisibility(downloadSuccessFlags[position] != null? View.GONE: View.VISIBLE);
             setPositionToTitle(position);
+            ConfigBuilder.IMAGE_ENGINE.onOuterPreviewPageSelected(mImages.get(position), isLoadSuccess[position]);
         }
 
         @Override

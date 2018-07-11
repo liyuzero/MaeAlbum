@@ -13,6 +13,8 @@ public interface ImageEngine {
     File downloadFile(Context context, Object pathInfo);
     void loadImg(Context context, Object pathInfo, ImageView imageView, boolean isNeedPlaceHolder, AlbumEngineLoadListener... listeners);
     void loadGifImg(Context context, Object pathInfo, ImageView imageView, boolean isNeedPlaceHolder, AlbumEngineLoadListener... listeners);
+    void onOuterPreviewPageSelected(Object path, boolean isLoadImgSuccess);
+
     interface AlbumEngineLoadListener {
         void onLoadComplete();
     }

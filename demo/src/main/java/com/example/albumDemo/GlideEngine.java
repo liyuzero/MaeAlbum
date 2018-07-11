@@ -23,6 +23,11 @@ import java.io.File;
 public class GlideEngine implements ImageEngine {
 
     @Override
+    public void onOuterPreviewPageSelected(Object path, boolean isLoadImgSuccess) {
+
+    }
+
+    @Override
     public void loadImg(Context context, Object path, ImageView imageView, boolean isNeedPlaceHolder, final AlbumEngineLoadListener... listeners) {
         BitmapRequestBuilder builder = Glide.with(context).load(path).asBitmap().error(R.mipmap.mae_album_img_default);
         if(isNeedPlaceHolder){

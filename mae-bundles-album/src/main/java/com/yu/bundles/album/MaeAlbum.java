@@ -3,6 +3,7 @@ package com.yu.bundles.album;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 
 import com.yu.bundles.album.image.ImageCursorActivity;
@@ -240,11 +241,11 @@ public final class MaeAlbum {
     }
 
     // --------------------- 外界用的图片预览方法
-    public static void startPreview(Context context, ArrayList<String> urls, int currPos) {
+    public static void startPreview(Context context, ArrayList<Parcelable> urls, int currPos) {
         startPreview(context, urls, currPos, true, false, true);
     }
 
-    public static void startPreview(Context context, ArrayList<String> urls, int currPos, boolean isShowDownloadIcon,
+    public static void startPreview(Context context, ArrayList<Parcelable> urls, int currPos, boolean isShowDownloadIcon,
                                     boolean isShowDownloadSureDialog, boolean isShowSnackBar) {
         if (context == null) {
             return;
@@ -259,7 +260,7 @@ public final class MaeAlbum {
         initStaticConfig(context);
 
         Intent i = new Intent(context, ImagePreviewOuter2Activity.class);
-        i.putStringArrayListExtra(ImagePreviewOuter2Activity.EXTRA_IMAGE_INFO_LIST, urls);
+        i.putParcelableArrayListExtra(ImagePreviewOuter2Activity.EXTRA_IMAGE_INFO_LIST, urls);
         i.putExtra(ImagePreviewOuter2Activity.EXTRA_IMAGE_POS, currPos);
         i.putExtra(ImagePreviewOuter2Activity.EXTRA_IS_SHOW_DOWNLOAD_SURE_DIALOG, isShowDownloadSureDialog);
         i.putExtra(ImagePreviewOuter2Activity.EXTRA_IS_SHOW_DOWNLOAD_ICON, isShowDownloadIcon);

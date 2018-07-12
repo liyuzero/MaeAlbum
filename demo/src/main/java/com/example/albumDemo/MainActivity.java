@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ArrayList<String> list = new ArrayList<>();
                 list.add("http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=74c4b391865494ee932f075a459c8a8b/f11f3a292df5e0fe1e3fbb2f566034a85edf72fc.jpg");
                 list.add("http://c.hiphotos.baidu.com/zhidao/pic/item/dcc451da81cb39dbccfc0e4ad4160924ab1830e9.jpg");
-                MaeAlbum.startPreview(this, list, 0);
+                MaeAlbum.startPreview(this, list, 0, false, false, false);
                 break;
         }
     }

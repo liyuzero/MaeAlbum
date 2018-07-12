@@ -292,7 +292,9 @@ public class ImagePreviewOuter2Activity extends AlbumBaseActivity implements Vie
         @Override
         public void onPageSelected(int position) {
             mCurrPos = position;
-            imgDownloadView.setVisibility(downloadSuccessFlags[position] != null? View.GONE: View.VISIBLE);
+            if(isShowDownloadIcon){
+                imgDownloadView.setVisibility(downloadSuccessFlags[position] != null? View.GONE: View.VISIBLE);
+            }
             setPositionToTitle(position);
             ConfigBuilder.IMAGE_ENGINE.onOuterPreviewPageSelected(mImages.get(position), isLoadSuccess[position]);
         }

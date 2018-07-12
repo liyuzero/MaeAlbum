@@ -32,7 +32,6 @@ import android.widget.ImageView;
 public class PhotoView extends ImageView {
 
     private PhotoViewAttacher attacher;
-    private ScaleType pendingScaleType;
 
     public PhotoView(Context context) {
         this(context, null);
@@ -58,11 +57,6 @@ public class PhotoView extends ImageView {
         //We always pose as a Matrix scale type, though we can change to another scale type
         //via the attacher
         super.setScaleType(ScaleType.MATRIX);
-        //apply the previously applied scale type
-        if (pendingScaleType != null) {
-            setScaleType(pendingScaleType);
-            pendingScaleType = null;
-        }
     }
 
     /**
@@ -98,9 +92,7 @@ public class PhotoView extends ImageView {
 
     @Override
     public void setScaleType(ScaleType scaleType) {
-        if (attacher == null) {
-            pendingScaleType = scaleType;
-        } else {
+        if (attacher != null) {
             attacher.setScaleType(scaleType);
         }
     }
@@ -147,17 +139,8 @@ public class PhotoView extends ImageView {
         attacher.setRotationBy(rotationDegree);
     }
 
-    @Deprecated
     public boolean isZoomEnabled() {
         return attacher.isZoomEnabled();
-    }
-
-    public boolean isZoomable() {
-        return attacher.isZoomable();
-    }
-
-    public void setZoomable(boolean zoomable) {
-        attacher.setZoomable(zoomable);
     }
 
     public RectF getDisplayRect() {
@@ -170,14 +153,6 @@ public class PhotoView extends ImageView {
 
     public boolean setDisplayMatrix(Matrix finalRectangle) {
         return attacher.setDisplayMatrix(finalRectangle);
-    }
-
-    public void getSuppMatrix(Matrix matrix) {
-        attacher.getSuppMatrix(matrix);
-    }
-
-    public boolean setSuppMatrix(Matrix matrix) {
-        return attacher.setDisplayMatrix(matrix);
     }
 
     public float getMinimumScale() {
@@ -228,14 +203,6 @@ public class PhotoView extends ImageView {
         attacher.setOnOutsidePhotoTapListener(listener);
     }
 
-    public void setOnViewTapListener(OnViewTapListener listener) {
-        attacher.setOnViewTapListener(listener);
-    }
-
-    public void setOnViewDragListener(OnViewDragListener listener) {
-        attacher.setOnViewDragListener(listener);
-    }
-
     public void setScale(float scale) {
         attacher.setScale(scale);
     }
@@ -248,12 +215,16 @@ public class PhotoView extends ImageView {
         attacher.setScale(scale, focalX, focalY, animate);
     }
 
+    public void setZoomable(boolean zoomable) {
+        attacher.setZoomable(zoomable);
+    }
+
     public void setZoomTransitionDuration(int milliseconds) {
         attacher.setZoomTransitionDuration(milliseconds);
     }
 
-    public void setOnDoubleTapListener(GestureDetector.OnDoubleTapListener onDoubleTapListener) {
-        attacher.setOnDoubleTapListener(onDoubleTapListener);
+    public void setOnDoubleTapListener(GestureDetector.OnDoubleTapListener newOnDoubleTapListener) {
+        attacher.setOnDoubleTapListener(newOnDoubleTapListener);
     }
 
     public void setOnScaleChangeListener(OnScaleChangedListener onScaleChangedListener) {

@@ -38,6 +38,7 @@ import android.widget.OverScroller;
  * gain the functionality that {@link PhotoView} offers
  */
 public class PhotoViewAttacher implements View.OnTouchListener,
+        OnGestureListener,
         View.OnLayoutChangeListener {
 
     private static float DEFAULT_MAX_SCALE = 3.0f;
@@ -77,12 +78,10 @@ public class PhotoViewAttacher implements View.OnTouchListener,
     private OnMatrixChangedListener mMatrixChangeListener;
     private OnPhotoTapListener mPhotoTapListener;
     private OnOutsidePhotoTapListener mOutsidePhotoTapListener;
-    private OnViewTapListener mViewTapListener;
     private View.OnClickListener mOnClickListener;
     private OnLongClickListener mLongClickListener;
     private OnScaleChangedListener mScaleChangeListener;
     private OnSingleFlingListener mSingleFlingListener;
-    private OnViewDragListener mOnViewDragListener;
 
     private FlingRunnable mCurrentFlingRunnable;
     private int mScrollEdge = EDGE_BOTH;
@@ -90,64 +89,6 @@ public class PhotoViewAttacher implements View.OnTouchListener,
 
     private boolean mZoomEnabled = true;
     private ScaleType mScaleType = ScaleType.FIT_CENTER;
-
-    private OnGestureListener onGestureListener = new OnGestureListener() {
-        @Override
-        public void onDrag(float dx, float dy) {
-            if (mScaleDragDetector.isScaling()) {
-                return; // Do not drag if we are already scaling
-            }
-
-            if (mOnViewDragListener != null) {
-                mOnViewDragListener.onDrag(dx, dy);
-            }
-            mSuppMatrix.postTranslate(dx, dy);
-            checkAndDisplayMatrix();
-
-        /*
-         * Here we decide whether to let the ImageView's parent to start taking
-         * over the touch event.
-         *
-         * First we check whether this function is enabled. We never want the
-         * parent to take over if we're scaling. We then check the edge we're
-         * on, and the direction of the scroll (i.e. if we're pulling against
-         * the edge, aka 'overscrolling', let the parent take over).
-         */
-            ViewParent parent = mImageView.getParent();
-            if (mAllowParentInterceptOnEdge && !mScaleDragDetector.isScaling() && !mBlockParentIntercept) {
-                if (mScrollEdge == EDGE_BOTH
-                        || (mScrollEdge == EDGE_LEFT && dx >= 1f)
-                        || (mScrollEdge == EDGE_RIGHT && dx <= -1f)) {
-                    if (parent != null) {
-                        parent.requestDisallowInterceptTouchEvent(false);
-                    }
-                }
-            } else {
-                if (parent != null) {
-                    parent.requestDisallowInterceptTouchEvent(true);
-                }
-            }
-        }
-
-        @Override
-        public void onFling(float startX, float startY, float velocityX, float velocityY) {
-            mCurrentFlingRunnable = new FlingRunnable(mImageView.getContext());
-            mCurrentFlingRunnable.fling(getImageViewWidth(mImageView),
-                    getImageViewHeight(mImageView), (int) velocityX, (int) velocityY);
-            mImageView.post(mCurrentFlingRunnable);
-        }
-
-        @Override
-        public void onScale(float scaleFactor, float focusX, float focusY) {
-            if ((getScale() < mMaxScale || scaleFactor < 1f) && (getScale() > mMinScale || scaleFactor > 1f)) {
-                if (mScaleChangeListener != null) {
-                    mScaleChangeListener.onScaleChange(scaleFactor, focusX, focusY);
-                }
-                mSuppMatrix.postScale(scaleFactor, scaleFactor, focusX, focusY);
-                checkAndDisplayMatrix();
-            }
-        }
-    };
 
     public PhotoViewAttacher(ImageView imageView) {
         mImageView = imageView;
@@ -161,7 +102,7 @@ public class PhotoViewAttacher implements View.OnTouchListener,
         mBaseRotation = 0.0f;
 
         // Create Gesture Detectors...
-        mScaleDragDetector = new CustomGestureDetector(imageView.getContext(), onGestureListener);
+        mScaleDragDetector = new CustomGestureDetector(imageView.getContext(), this);
 
         mGestureDetector = new GestureDetector(imageView.getContext(), new GestureDetector.SimpleOnGestureListener() {
 
@@ -200,13 +141,8 @@ public class PhotoViewAttacher implements View.OnTouchListener,
                 }
                 final RectF displayRect = getDisplayRect();
 
-                final float x = e.getX(), y = e.getY();
-
-                if (mViewTapListener != null) {
-                    mViewTapListener.onViewTap(mImageView, x, y);
-                }
-
                 if (displayRect != null) {
+                    final float x = e.getX(), y = e.getY();
 
                     // Check to see if the user tapped on the photo
                     if (displayRect.contains(x, y)) {
@@ -270,7 +206,6 @@ public class PhotoViewAttacher implements View.OnTouchListener,
         this.mSingleFlingListener = onSingleFlingListener;
     }
 
-    @Deprecated
     public boolean isZoomEnabled() {
         return mZoomEnabled;
     }
@@ -290,7 +225,8 @@ public class PhotoViewAttacher implements View.OnTouchListener,
         }
 
         mSuppMatrix.set(finalMatrix);
-        checkAndDisplayMatrix();
+        setImageViewMatrix(getDrawMatrix());
+        checkMatrixBounds();
 
         return true;
     }
@@ -333,10 +269,62 @@ public class PhotoViewAttacher implements View.OnTouchListener,
     }
 
     @Override
+    public void onDrag(float dx, float dy) {
+        if (mScaleDragDetector.isScaling()) {
+            return; // Do not drag if we are already scaling
+        }
+
+        mSuppMatrix.postTranslate(dx, dy);
+        checkAndDisplayMatrix();
+
+        /*
+         * Here we decide whether to let the ImageView's parent to start taking
+         * over the touch event.
+         *
+         * First we check whether this function is enabled. We never want the
+         * parent to take over if we're scaling. We then check the edge we're
+         * on, and the direction of the scroll (i.e. if we're pulling against
+         * the edge, aka 'overscrolling', let the parent take over).
+         */
+        ViewParent parent = mImageView.getParent();
+        if (mAllowParentInterceptOnEdge && !mScaleDragDetector.isScaling() && !mBlockParentIntercept) {
+            if (mScrollEdge == EDGE_BOTH
+                    || (mScrollEdge == EDGE_LEFT && dx >= 1f)
+                    || (mScrollEdge == EDGE_RIGHT && dx <= -1f)) {
+                if (parent != null) {
+                    parent.requestDisallowInterceptTouchEvent(false);
+                }
+            }
+        } else {
+            if (parent != null) {
+                parent.requestDisallowInterceptTouchEvent(true);
+            }
+        }
+    }
+
+    @Override
+    public void onFling(float startX, float startY, float velocityX,
+                        float velocityY) {
+        mCurrentFlingRunnable = new FlingRunnable(mImageView.getContext());
+        mCurrentFlingRunnable.fling(getImageViewWidth(mImageView),
+                getImageViewHeight(mImageView), (int) velocityX, (int) velocityY);
+        mImageView.post(mCurrentFlingRunnable);
+    }
+
+    @Override
     public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
         // Update our base matrix, as the bounds have changed
-        if (left != oldLeft || top != oldTop || right != oldRight || bottom != oldBottom) {
-            updateBaseMatrix(mImageView.getDrawable());
+        updateBaseMatrix(mImageView.getDrawable());
+    }
+
+    @Override
+    public void onScale(float scaleFactor, float focusX, float focusY) {
+        if ((getScale() < mMaxScale || scaleFactor < 1f) && (getScale() > mMinScale || scaleFactor > 1f)) {
+            if (mScaleChangeListener != null) {
+                mScaleChangeListener.onScaleChange(scaleFactor, focusX, focusY);
+            }
+            mSuppMatrix.postScale(scaleFactor, scaleFactor, focusX, focusY);
+            checkAndDisplayMatrix();
         }
     }
 
@@ -367,13 +355,6 @@ public class PhotoViewAttacher implements View.OnTouchListener,
                         RectF rect = getDisplayRect();
                         if (rect != null) {
                             v.post(new AnimatedZoomRunnable(getScale(), mMinScale,
-                                    rect.centerX(), rect.centerY()));
-                            handled = true;
-                        }
-                    } else if (getScale() > mMaxScale) {
-                        RectF rect = getDisplayRect();
-                        if (rect != null) {
-                            v.post(new AnimatedZoomRunnable(getScale(), mMaxScale,
                                     rect.centerX(), rect.centerY()));
                             handled = true;
                         }
@@ -450,14 +431,6 @@ public class PhotoViewAttacher implements View.OnTouchListener,
         this.mOutsidePhotoTapListener = mOutsidePhotoTapListener;
     }
 
-    public void setOnViewTapListener(OnViewTapListener listener) {
-        mViewTapListener = listener;
-    }
-
-    public void setOnViewDragListener(OnViewDragListener listener) {
-        mOnViewDragListener = listener;
-    }
-
     public void setScale(float scale) {
         setScale(scale, false);
     }
@@ -499,10 +472,6 @@ public class PhotoViewAttacher implements View.OnTouchListener,
             mScaleType = scaleType;
             update();
         }
-    }
-
-    public boolean isZoomable() {
-        return mZoomEnabled;
     }
 
     public void setZoomable(boolean zoomable) {
@@ -774,7 +743,7 @@ public class PhotoViewAttacher implements View.OnTouchListener,
             float scale = mZoomStart + t * (mZoomEnd - mZoomStart);
             float deltaScale = scale / getScale();
 
-            onGestureListener.onScale(deltaScale, mFocalX, mFocalY);
+            onScale(deltaScale, mFocalX, mFocalY);
 
             // We haven't hit our target scale yet, so post ourselves again
             if (t < 1f) {
@@ -850,7 +819,7 @@ public class PhotoViewAttacher implements View.OnTouchListener,
                 final int newY = mScroller.getCurrY();
 
                 mSuppMatrix.postTranslate(mCurrentX - newX, mCurrentY - newY);
-                checkAndDisplayMatrix();
+                setImageViewMatrix(getDrawMatrix());
 
                 mCurrentX = newX;
                 mCurrentY = newY;

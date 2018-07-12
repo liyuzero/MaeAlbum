@@ -24,7 +24,7 @@ allprojects {
 ```
 > 2. 在具体的module中新增依赖，新增依赖：
 ```
-compile 'com.github.liyuzero:MaeBundlesAlbum:1.1.6'
+compile 'com.github.liyuzero:MaeBundlesAlbum:1.1.7'
 ```
 
 ### 使用步骤

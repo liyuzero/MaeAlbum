@@ -10,14 +10,17 @@
         android:supportsRtl="true">
 
         <activity
+            android:multiprocess="true"
             android:name="com.yu.bundles.album.preview.ImagePreviewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/mae_album_AppTheme" />
         <activity
+            android:multiprocess="true"
             android:name="com.yu.bundles.album.image.ImageCursorActivity"
             android:screenOrientation="portrait"
             android:theme="@style/mae_album_AppTheme" />
         <activity
+            android:multiprocess="true"
             android:name="com.yu.bundles.album.preview.ImagePreviewOuter2Activity"
             android:screenOrientation="portrait"
             android:theme="@style/mae_album_AppTheme" />

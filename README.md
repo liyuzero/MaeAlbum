@@ -2,6 +2,7 @@
 ====
 相册模块，类似于知乎相册; 可单独使用;
 图片加载由外界指定，可参考demo，内部不提供默认实现
+支持多进程
 
 ## 效果展示
 ![组件演示](https://github.com/zhaoyubetter/MarkdownPhotos/raw/master/gif/album_demo.gif)
@@ -24,7 +25,7 @@ allprojects {
 ```
 > 2. 在具体的module中新增依赖，新增依赖：
 ```
-compile 'com.github.liyuzero:MaeBundlesAlbum:1.1.7'
+compile 'com.github.liyuzero:MaeBundlesAlbum:1.1.8'
 ```
 
 ### 使用步骤

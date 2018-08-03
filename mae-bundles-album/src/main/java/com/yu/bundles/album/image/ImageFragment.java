@@ -118,7 +118,7 @@ public class ImageFragment extends Fragment implements ImageAdapter.OnPreviewLis
 
         Uri data;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            data = FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".mae.bundles.album.fileprovider", file);
+            data = FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".yu.bundles.album.fileprovider", file);
             // 给目标应用一个临时授权
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         } else {

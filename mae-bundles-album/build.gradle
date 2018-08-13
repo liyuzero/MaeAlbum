@@ -46,7 +46,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
     compile "com.android.support:design:${SUPPORT_VERSION}"
     testCompile 'junit:junit:4.12'
-    compile 'com.github.liyuzero:maeMonitorFragment:1.0.0'
+    compile 'com.github.liyuzero:MaeMonitorFragment:1.0.1'
 }
 
 

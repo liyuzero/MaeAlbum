@@ -199,7 +199,7 @@ public class ImagePreviewOuter2Activity extends AlbumBaseActivity implements Vie
                             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                             Uri fileUri;
                             if(Build.VERSION.SDK_INT >= 24){
-                                fileUri = FileProvider.getUriForFile(getApplicationContext(), getApplication().getPackageName() +".mae.bundles.album.fileprovider", file);
+                                fileUri = FileProvider.getUriForFile(getApplicationContext(), getApplication().getPackageName() +".yu.bundles.album.fileprovider", file);
                             } else {
                                 fileUri = Uri.fromFile(file);
                             }

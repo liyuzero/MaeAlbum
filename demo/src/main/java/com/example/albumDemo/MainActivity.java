@@ -1,5 +1,6 @@
 package com.example.albumDemo;
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import com.yu.bundles.album.AlbumListener;
 import com.yu.bundles.album.ConfigBuilder;
 import com.yu.bundles.album.MaeAlbum;
 import com.yu.bundles.album.OnPreviewLongClickListener;
+import com.yu.bundles.monitorfragment.MAEMonitorFragment;
+import com.yu.bundles.monitorfragment.MAEPermissionCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,29 +45,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View view) {
-        MaeAlbum.setNavigationIcon(R.mipmap.mae_album_ic_action_back);
-        switch (view.getId()) {
-            case R.id.open_album_blue:
-                MaeAlbum.setStyle(R.style.MyAlumBlue);
-                blueStyle();
-                break;
-            case R.id.open_album_red:
-                MaeAlbum.setStyle(R.style.MyAlumRed);
-                redStyle();
-                break;
-            case R.id.open_album_user:
-                MaeAlbum.setStyle(R.style.MyAlumWhite);
-                userStyle();
-                break;
-            case R.id.outer_album_overview:
-                MaeAlbum.setStyle(R.style.MyAlumWhite);
-                ArrayList<String> list = new ArrayList<>();
-                list.add("http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=74c4b391865494ee932f075a459c8a8b/f11f3a292df5e0fe1e3fbb2f566034a85edf72fc.jpg");
-                list.add("http://c.hiphotos.baidu.com/zhidao/pic/item/dcc451da81cb39dbccfc0e4ad4160924ab1830e9.jpg");
-                MaeAlbum.startPreview(this, list, 0, false, false, false);
-                break;
-        }
+    public void onClick(final View view) {
+        MAEMonitorFragment.getInstance(this).requestPermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE}, new MAEPermissionCallback() {
+            @Override
+            public void onPermissionApplySuccess() {
+                MaeAlbum.setNavigationIcon(R.mipmap.mae_album_ic_action_back);
+                switch (view.getId()) {
+                    case R.id.open_album_blue:
+                        MaeAlbum.setStyle(R.style.MyAlumBlue);
+                        blueStyle();
+                        break;
+                    case R.id.open_album_red:
+                        MaeAlbum.setStyle(R.style.MyAlumRed);
+                        redStyle();
+                        break;
+                    case R.id.open_album_user:
+                        MaeAlbum.setStyle(R.style.MyAlumWhite);
+                        userStyle();
+                        break;
+                    case R.id.outer_album_overview:
+                        MaeAlbum.setStyle(R.style.MyAlumWhite);
+                        ArrayList<String> list = new ArrayList<>();
+                        list.add("http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=74c4b391865494ee932f075a459c8a8b/f11f3a292df5e0fe1e3fbb2f566034a85edf72fc.jpg");
+                        list.add("http://c.hiphotos.baidu.com/zhidao/pic/item/dcc451da81cb39dbccfc0e4ad4160924ab1830e9.jpg");
+                        MaeAlbum.startPreview(MainActivity.this, list, 0, true, false, true);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPermissionApplyFailure(List<String> list, List<Boolean> list1) {
+
+            }
+        });
     }
 
     private void userStyle() {
@@ -90,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .column(3)
                 .fileType(ConfigBuilder.FILE_TYPE.VIDEO)
                 .setIsShowCapture(true)
-                .forResult(new AlbumListener() {
+                /*.forResult(new AlbumListener() {
                     @Override
                     public void onSelected(List<String> ps) {   // 选择完毕回调
                         show(ps);
@@ -100,7 +114,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onFull(List<String> ps, String p) {  // 选满了的回调
                         Toast.makeText(getApplicationContext(), "选满了", Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
+                .forResult(20);
     }
 
     private void redStyle() {
@@ -123,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(getApplicationContext(), "选满了", Toast.LENGTH_SHORT).show();
                     }
                 });
-
     }
 
     @Override

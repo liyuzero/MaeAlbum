@@ -25,7 +25,7 @@ public class AlbumBaseActivity extends AppCompatActivity{
     }
 
     private void init(){
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        /*requestWindowFeature(Window.FEATURE_NO_TITLE);
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -49,6 +49,12 @@ public class AlbumBaseActivity extends AppCompatActivity{
                     ((ViewGroup)childView).setClipToPadding(true);
                 }
             }
+        }*/
+        if (Build.VERSION.SDK_INT >= 23) {
+            // 系统 6.0 以上 状态栏白底黑字的实现方法
+            this.getWindow()
+                    .getDecorView()
+                    .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
     }
 

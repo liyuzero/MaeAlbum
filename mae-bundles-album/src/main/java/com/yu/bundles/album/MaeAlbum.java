@@ -44,11 +44,6 @@ public final class MaeAlbum {
      */
     private int column = 3;
 
-    /**
-     * 图片选中回调接口
-     */
-    private AlbumListener albumListener;
-
     /*
     * 是否显示拍照
     * */
@@ -190,24 +185,10 @@ public final class MaeAlbum {
         ConfigBuilder.onPreviewLongClickListener = onPreviewLongClickListener;
     }
 
-    /**
-     * 启动方法
-     *
-     */
-    public void forResult(final AlbumListener albumListener) {
-        Activity activity = mContext.get();
-        if (activity == null || albumListener == null) {
-            return;
-        }
-
-        //Intent intent = new Intent(activity, ImageActivity.class);
-        Intent intent = new Intent(activity, ImageCursorActivity.class);
-        Fragment fragment = mFragment != null ? mFragment.get() : null;
-
+    private void initConfig(Activity activity) {
         // 设置 内部config
         ConfigBuilder.column = this.column;
         ConfigBuilder.max = this.maxSize;
-        ConfigBuilder.setListener(albumListener);
         ConfigBuilder.MIN_FILE_SIZE = this.minFileSize;
         ConfigBuilder.MAX_FILE_SIZE = this.maxFileSize;
         ConfigBuilder.mimeTypes = this.mimeTypes;
@@ -216,28 +197,48 @@ public final class MaeAlbum {
         ConfigBuilder.photoSavedDirPath = this.photoSavedDirPath;
 
         initStaticConfig(activity);
+    }
 
-        if (fragment != null) {
-            MAEMonitorFragment.getInstance(fragment).startActivityForResult(intent, 325467, new MAEActivityResultListener() {
-                @Override
-                public void onActivityResult(int i, int i1, Intent intent) {
-                    if(i1 == Activity.RESULT_OK && intent != null){
-                        List<String> list = intent.getStringArrayListExtra(ImageCursorActivity.EXTRA_RESULT_SELECTION_PATH);
-                        albumListener.onSelected(list);
-                    }
-                }
-            });
-        } else {
-            MAEMonitorFragment.getInstance(activity).startActivityForResult(intent, 325467, new MAEActivityResultListener() {
-                @Override
-                public void onActivityResult(int i, int i1, Intent intent) {
-                    if(i1 == Activity.RESULT_OK && intent != null){
-                        List<String> list = intent.getStringArrayListExtra(ImageCursorActivity.EXTRA_RESULT_SELECTION_PATH);
-                        albumListener.onSelected(list);
-                    }
-                }
-            });
+    public void forResult(int requestCode) {
+        Activity activity = mContext.get();
+        if(activity == null && mFragment.get() != null){
+            activity = mFragment.get().getActivity();
         }
+        if (activity == null) {
+            return;
+        }
+        Intent intent = new Intent(activity, ImageCursorActivity.class);
+        initConfig(activity);
+        activity.startActivityForResult(intent, requestCode);
+    }
+
+    /**
+     * 启动方法
+     *
+     */
+    public void forResult(final AlbumListener albumListener) {
+        Activity activity = mContext.get();
+        if(activity == null && mFragment.get() != null){
+            activity = mFragment.get().getActivity();
+        }
+        if (activity == null || albumListener == null) {
+            return;
+        }
+        ConfigBuilder.setListener(albumListener);
+
+        //Intent intent = new Intent(activity, ImageActivity.class);
+        Intent intent = new Intent(activity, ImageCursorActivity.class);
+        initConfig(activity);
+
+        MAEMonitorFragment.getInstance(activity).startActivityForResult(intent, 325467, new MAEActivityResultListener() {
+            @Override
+            public void onActivityResult(int i, int i1, Intent intent) {
+                if(i1 == Activity.RESULT_OK && intent != null){
+                    List<String> list = intent.getStringArrayListExtra(ImageCursorActivity.EXTRA_RESULT_SELECTION_PATH);
+                    albumListener.onSelected(list);
+                }
+            }
+        });
     }
 
     // --------------------- 外界用的图片预览方法

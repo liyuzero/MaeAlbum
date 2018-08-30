@@ -39,6 +39,12 @@ public class MaeAlbumToolbar extends Toolbar {
         }
     }
 
+    @Override
+    public void inflateMenu(int resId) {
+        super.inflateMenu(resId);
+        refreshStyle();
+    }
+
     public void refreshStyle(){
         getContext().getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
         getContext().getTheme().resolveAttribute(R.attr.mae_album_topBar_text_color, contentVal, true);

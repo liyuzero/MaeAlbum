@@ -36,7 +36,7 @@ callback， onActivityResult 则不会调用了)：
 
 在`Activity` or `Fragment`中：
 ```
-    MEChelsea.from(this)
+    MaeAlbum.from(this)
                 .maxSize(9)
                 .column(3)
 //                .imageEngine()      // 指定图片加载引擎

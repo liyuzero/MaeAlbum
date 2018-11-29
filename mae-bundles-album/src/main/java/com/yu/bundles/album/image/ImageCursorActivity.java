@@ -1,6 +1,7 @@
 package com.yu.bundles.album.image;
 
 import android.app.Activity;
+import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +13,6 @@ import android.os.Handler;
 import android.support.annotation.StringRes;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.LoaderManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.MenuItem;
 import android.view.View;
@@ -83,6 +83,7 @@ public class ImageCursorActivity extends AlbumBaseActivity implements View.OnCli
         final IntentFilter filter = new IntentFilter(ConfigBuilder.SELECT_ACTION);
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(receiver, filter);
     }
+
 
     @Override
     protected void onDestroy() {
@@ -256,8 +257,8 @@ public class ImageCursorActivity extends AlbumBaseActivity implements View.OnCli
     }
 
     @Override
-    public LoaderManager getSupportLoaderManager() {
-        return super.getSupportLoaderManager();
+    public LoaderManager getLoadManager() {
+        return super.getLoaderManager();
     }
 
     //--------------------------------- 系统状态处理 ------------------------------------------

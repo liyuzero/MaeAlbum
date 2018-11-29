@@ -1,11 +1,11 @@
 package com.yu.bundles.album.model;
 
 import android.content.Context;
+import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
+import android.app.LoaderManager;
 
 /**
  * Created by liyu on 2017/9/28.

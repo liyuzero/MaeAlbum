@@ -1,9 +1,9 @@
 package com.yu.bundles.album.presenter;
 
 import android.app.Activity;
+import android.app.LoaderManager;
 import android.database.Cursor;
 import android.support.annotation.StringRes;
-import android.support.v4.app.LoaderManager;
 
 import com.yu.bundles.album.entity.AlbumInfo;
 
@@ -22,7 +22,7 @@ public interface AlbumView {
 
     Activity getActivity();
 
-    LoaderManager getSupportLoaderManager();
+    LoaderManager getLoadManager();
 
     void showMessage(@StringRes int messageId);
 

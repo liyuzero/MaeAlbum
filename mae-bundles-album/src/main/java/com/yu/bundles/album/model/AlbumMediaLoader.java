@@ -1,13 +1,13 @@
 package com.yu.bundles.album.model;
 
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.MergeCursor;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v4.content.CursorLoader;
 
 import com.yu.bundles.album.ConfigBuilder;
 import com.yu.bundles.album.entity.Album;

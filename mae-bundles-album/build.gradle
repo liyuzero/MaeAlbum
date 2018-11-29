@@ -5,7 +5,6 @@ group='com.github.liyuzero'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION
-    buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
         minSdkVersion MIN_SDK_VERSION
@@ -38,15 +37,11 @@ configurations.all {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile "com.android.support:support-annotations:${SUPPORT_VERSION}"
-    compile "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
-    compile "com.android.support:design:${SUPPORT_VERSION}"
-    testCompile 'junit:junit:4.12'
-    compile 'com.github.liyuzero:MaeMonitorFragment:1.0.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:support-annotations:${SUPPORT_VERSION}"
+    implementation "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
+    implementation "com.android.support:design:${SUPPORT_VERSION}"
+    api 'com.github.liyuzero:MaeMonitorFragment:1.0.1'
 }
 
 

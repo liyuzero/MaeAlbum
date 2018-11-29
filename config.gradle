@@ -2,11 +2,10 @@
 ext {
   VERSION_NAME = "3.5.0"
   VERSION_CODE = 1
-  COMPILE_SDK_VERSION = 26           // 25 23
-  BUILD_TOOLS_VERSION = "26.0.1"   // 25.0.2 23.0.2
+  COMPILE_SDK_VERSION = 27           // 25 23
   MIN_SDK_VERSION = 14
-  TARGET_SDK_VERSION = 23     // 这个千万不能改
-  SUPPORT_VERSION = "26.0.2"
+  TARGET_SDK_VERSION = 23
+  SUPPORT_VERSION = "27.1.1"
   GLIDE_VERSION = '3.7.0'
   // support依赖支持包
   compile_support = [

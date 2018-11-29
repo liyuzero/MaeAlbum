@@ -27,8 +27,8 @@ public class AlbumPresenterImpl implements AlbumModelImpl.AlbumCallbacks, AlbumM
 
     public AlbumPresenterImpl(@NonNull AlbumView mAlbumView) {
         this.mAlbumView = mAlbumView;
-        albumModel = new AlbumModelImpl(mAlbumView.getActivity(), mAlbumView.getSupportLoaderManager(), this);
-        albumMediaModel = new AlbumMediaModelImpl(mAlbumView.getActivity(), mAlbumView.getSupportLoaderManager(), this);
+        albumModel = new AlbumModelImpl(mAlbumView.getActivity(), mAlbumView.getLoadManager(), this);
+        albumMediaModel = new AlbumMediaModelImpl(mAlbumView.getActivity(), mAlbumView.getLoadManager(), this);
         ImageQueue.init();
     }
 

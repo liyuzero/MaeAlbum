@@ -257,9 +257,6 @@ public final class MaeAlbum {
         if(urls.size() <= 0){
             return;
         }
-        if(urls.size() > 100){
-            throw new IllegalArgumentException("The number of urls must be smaller than 100");
-        }
 
         initStaticConfig(context);
 

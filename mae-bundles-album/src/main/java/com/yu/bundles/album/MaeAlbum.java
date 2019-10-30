@@ -261,13 +261,7 @@ public final class MaeAlbum {
         initStaticConfig(context);
 
         Intent i = new Intent(context, ImagePreviewOuter2Activity.class);
-        if(urls.get(0) instanceof Parcelable){
-            i.putParcelableArrayListExtra(ImagePreviewOuter2Activity.EXTRA_IMAGE_INFO_LIST, (ArrayList<Parcelable>) urls);
-        } else if(urls.get(0) instanceof String){
-            i.putStringArrayListExtra(ImagePreviewOuter2Activity.EXTRA_IMAGE_INFO_LIST, (ArrayList<String>) urls);
-        } else {
-            return;
-        }
+        i.putParcelableArrayListExtra(ImagePreviewOuter2Activity.EXTRA_IMAGE_INFO_LIST, urls);
         i.putExtra(ImagePreviewOuter2Activity.EXTRA_IMAGE_POS, currPos);
         i.putExtra(ImagePreviewOuter2Activity.EXTRA_IS_SHOW_DOWNLOAD_SURE_DIALOG, isShowDownloadSureDialog);
         i.putExtra(ImagePreviewOuter2Activity.EXTRA_IS_SHOW_DOWNLOAD_ICON, isShowDownloadIcon);
